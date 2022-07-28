@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Service;
+use App\AccessLogs;
+use App\Rating;
+
 
 class User extends Authenticatable
 {
@@ -36,4 +40,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ratings(){
+        return $this->hasMany(Rating::class);
+    }
+
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
+
+    public function accessLogs(){
+        return $this->hasMany(AccessLogs::class);
+    }
 }

@@ -46,6 +46,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="rating">Avaliação:</label>
+                    <textarea name="rating" class="form-control" id="rating" rows="6"></textarea>
+                </div>
+
+                <div class="form-group">
                     <button type="submit" class="btn btn-dark">Salvar</button>
                 </div>
             </form>

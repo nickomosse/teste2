@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\ServiceType;
+use App\Rating;
 
 class Service extends Model
 {
@@ -13,6 +14,10 @@ class Service extends Model
     }
 
     public function serviceType() {
-        return $this->belongsTo(ServiceType::class);
+        return $this->belongsTo(ServiceType::class, 'serviceType_id');
+    }
+
+    public function ratings(){
+        return $this->hasMany(Rating::class);
     }
 }

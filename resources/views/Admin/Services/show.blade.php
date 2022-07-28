@@ -33,10 +33,17 @@
                 </li>
 
             </ul>
+            <hr>
+
+            <div class="form-group">
+                <label for="rating">Avaliação principal:</label>
+                <textarea disabled name="rating" class="form-control" id="rating" rows="6">{{$rating->text}}</textarea>
+            </div>
 
             <form action="{{ route('services.destroy', $service->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
+                <a class="btn btn-primary" href="{{route('ratings.index', $service->id)}}" role="button">Todas avaliações</a>
                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>DELETAR</button>
             </form>
         </div>

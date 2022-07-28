@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Service;
 use App\ServiceType;
 use App\User;
+use App\Rating;
 
 class ServiceController extends Controller
 {
@@ -30,6 +31,7 @@ class ServiceController extends Controller
 
     public function store(Request $request){
         $service = new Service;
+        $rating = new Rating;
 
         $service->name = $request->name;
         $service->providerName = $request->providerName;
@@ -38,6 +40,13 @@ class ServiceController extends Controller
         $service->user_id = $request->user_id;
         $service->direct = true;
         $service->save();
+
+        $rating->text = $request->rating;
+        $rating->service_id = $service->id;
+        $rating->user_id = $service->user_id;
+        $rating->direct = false;
+        $rating->save();
+
 
         return redirect()->route('services.index');
     }
@@ -51,10 +60,14 @@ class ServiceController extends Controller
             return back();
         }
 
+        $rating = $service->ratings->where('user_id', $service->user->id)->first();
+
+
         return view('admin.services.edit', [
             'service' => $service,
             'serviceTypes' => $serviceTypes,
             'users' => $users,
+            'rating' => $rating,
         ]);
     }
 
@@ -73,19 +86,26 @@ class ServiceController extends Controller
 
         $service->save();
 
+        $rating = $service->ratings->where('user_id', $service->user->id)->first();
+        $rating->text = $request->rating;
+        $rating->save();
+
         return redirect()->route('services.index');
     }
 
     public function show($id){
-        $service = Service::with('serviceType')->find($id);
+        $service = Service::find($id);
 
         if (!$id) {
             return back();
         }
+        $rating = $service->ratings->where('user_id', $service->user->id)->first();
+        // $serviceType = ServiceType::find($service->serviceType_id);
+        // $service->serviceType = $serviceType;
 
-        dd($service->serviceType);
         return view('admin.services.show', [
             'service' => $service,
+            'rating' => $rating,
         ]);
     }
 

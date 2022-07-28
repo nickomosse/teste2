@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\AccessLogs;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -51,6 +52,10 @@ class LoginController extends Controller
 
 
         if (Auth::attempt(['phone' => $credentials['phone'], 'password' => $request->password])) {
+            $log = new AccessLogs;
+            $log->user_id = Auth::user()->id;
+            $log->save();
+
             return redirect()->route('home');
         } else {
             return back()->with('error', 'Usuário e/ou senha incorreto(s).');
@@ -60,6 +65,20 @@ class LoginController extends Controller
     public function logout() {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function recover() {
+
+        return view('recover');
+    }
+
+    public function recovercode(Request $request) {
+        $email = $request['email'];
+        $code = strval(rand(1000, 9999));
+
+        \Illuminate\Support\Facades\Mail::send(new \App\Mail\recoverpass($email, $code));
+
+        return view('confirmcode');
     }
 
 }

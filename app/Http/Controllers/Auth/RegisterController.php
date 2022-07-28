@@ -94,7 +94,7 @@ class RegisterController extends Controller
             'email',
             'password',
         ]);
-
+        $data['phone'] = preg_replace('/[^0-9]/', '', $request->phone);
         $validator = $this->validator($data);
 
         if($validator->fails()){
