@@ -40,4 +40,49 @@ class ServiceController extends Controller
 
         return 'ok';
     }
+
+    public function search(Request $request){
+        $resultsServices = Service::where('name', 'LIKE', "%{$request->search}%")->get();
+        $resultsServiceTypes = ServiceType::where('name', 'LIKE', "%{$request->search}%")->get();
+
+        foreach ($resultsServiceTypes as $serviceType) {
+            $id = $serviceType->id;
+            $services = Service::where('serviceType_id', $id)->get();
+
+            $resultsServices = $resultsServices->merge($services);
+        }
+
+        return view('services.search', [
+            'services' => $resultsServices,
+        ]);
+    }
+
+    public function show($id){
+        $service = Service::find($id);
+
+        if (!$id) {
+            return back();
+        }
+
+        $ratings = $service->ratings;
+        $myRating = $ratings->where('user_id', Auth::user()->id);
+        $haveRating = false;
+
+        //Remove the user Rating from the list
+        $ratings = $ratings->diff($myRating);
+
+
+        if (count($myRating) == 1) {
+            $haveRating = true;
+            $myRating = $myRating->first();
+        }
+
+        return view('services.show', [
+            'service' => $service,
+            'ratings' => $ratings,
+            'myRating' => $myRating,
+            'haveRating' => $haveRating,
+
+        ]);
+    }
 }

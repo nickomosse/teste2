@@ -112,13 +112,8 @@
             .card {
                 background: #F0EDED;
             }
-            a {
-                color: inherit;
-
-            }
-            a:hover{
-                text-decoration: none;
-                color: inherit;
+            a{
+                width: 400px !important;
             }
             .card {
                 border-radius: 15px;
@@ -138,21 +133,25 @@
         </section>
         <main>
 
-            <p class="h5 py-4 mb-4 principal">Indicações do tipo: <b>{{$serviceType->name}}</b></p>
-
-            <div class="container w-sm-50">
+            <div class="container w-sm-50 mt-4">
                 <div class="row">
-                    @foreach ($services as $service)
-                        <a href="{{route('g.services.show', $service->id)}}">
-                            <div class="col-sm-6 mb-4">
-                                <div class="mx-2 card">
-                                    <h3 class="mt-3">{{$service->providerName}}</h3>
-                                    <p>{{$service->providerPhone}}</p>
-                                    <a href="#" class="btn btn-success mx-auto my-3">Ver Avaliações</a>
+
+                    <div class="col-sm-12 mb-4 mx-auto">
+                        <div class="mx-2 card">
+                            <h3 class="mt-3">{{$service->providerName}}</h3>
+                            <p>{{$service->providerPhone}}</p>
+                            <h4 class="mt-4">Texto da avaliação:</h2>
+                            <form action="{{route('g.ratings.update', $rating->id)}}" method="post" class="form">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-group col-sm-8 mx-auto mt-2">
+                                    <textarea name="ratingtext" class="form-control" cols="30" rows="10">{{$rating->text}}</textarea>
                                 </div>
-                            </div>
-                        </a>
-                    @endforeach
+                                <button type="submit" class="btn btn-success mb-5">Salvar avaliação!</button>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

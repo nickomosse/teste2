@@ -115,6 +115,9 @@
             a{
                 width: 400px !important;
             }
+            .card-h{
+                background-color: inherit;
+            }
         </style>
     </head>
     <body>
@@ -131,11 +134,20 @@
             <div class="container">
                 <div class="row">
                     <div class="card col-sm-8 mx-auto">
+                        <div class="card-h mx-auto mt-2">
+                            <form action="{{route('g.services.search')}}" method="POST" class="form form-inline mt-2">
+                                @csrf
+                                <input type="text" name="search" class="form-control">
+                                <button type="submit" class="btn btn-success">Pesquisar</button>
+                            </form>
+                        </div>
+                        <hr>
                         <div class="card-body">
+
                             <p>Ou, se desejar, clique abaixo em um dos serviços mais buscados:</p>
                             <div class="mx-auto my-5 scrolltest">
                                 @foreach ($serviceTypes as $serviceType)
-                                    <a href="" class="px-5 py-2 my-2 btn btn-success font-weight-bold btn-principal">{{$serviceType->name}}</a><br>
+                                    <a href="{{route('g.servicetypes.show', $serviceType->id)}}" class="px-5 py-2 my-2 btn btn-success font-weight-bold btn-principal">{{$serviceType->name}}</a><br>
                                 @endforeach
                             </div>
                         </div>

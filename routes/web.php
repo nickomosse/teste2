@@ -24,6 +24,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/servicetypes', 'ServiceTypeController@index')->name('g.servicetypes.index');
     Route::get('/servicetypes/{id}', 'ServiceTypeController@show')->name('g.servicetypes.show');
 
+    Route::any('/service/search', 'ServiceController@search')->name('g.services.search');
+    Route::get('/service/show/{id}', 'ServiceController@show')->name('g.services.show');
+
+
+    Route::get('/rating/create/{id}', 'RatingController@create')->name('g.ratings.create');
+    Route::post('/rating/store/{id}', 'RatingController@store')->name('g.ratings.store');
+    Route::get('/rating/edit/{id}/{rating}', 'RatingController@edit')->name('g.ratings.edit');
+    Route::put('/rating/update/{id}', 'RatingController@update')->name('g.ratings.update');
+
+
 
     Route::get('/service/create', 'ServiceController@create')->name('g.services.create');
     Route::post('/service/store', 'ServiceController@store')->name('g.services.store');

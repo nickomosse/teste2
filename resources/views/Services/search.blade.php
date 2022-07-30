@@ -138,7 +138,7 @@
         </section>
         <main>
 
-            <p class="h5 py-4 mb-4 principal">Indicações do tipo: <b>{{$serviceType->name}}</b></p>
+            <p class="h5 py-4 mb-4 principal">Resultado da pesquisa</b></p>
 
             <div class="container w-sm-50">
                 <div class="row">

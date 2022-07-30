@@ -112,13 +112,8 @@
             .card {
                 background: #F0EDED;
             }
-            a {
-                color: inherit;
-
-            }
-            a:hover{
-                text-decoration: none;
-                color: inherit;
+            a{
+                width: 400px !important;
             }
             .card {
                 border-radius: 15px;
@@ -138,21 +133,40 @@
         </section>
         <main>
 
-            <p class="h5 py-4 mb-4 principal">Indicações do tipo: <b>{{$serviceType->name}}</b></p>
-
-            <div class="container w-sm-50">
+            <div class="container w-sm-50 mt-4">
                 <div class="row">
-                    @foreach ($services as $service)
-                        <a href="{{route('g.services.show', $service->id)}}">
-                            <div class="col-sm-6 mb-4">
-                                <div class="mx-2 card">
-                                    <h3 class="mt-3">{{$service->providerName}}</h3>
-                                    <p>{{$service->providerPhone}}</p>
-                                    <a href="#" class="btn btn-success mx-auto my-3">Ver Avaliações</a>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
+
+                    <div class="col-sm-12 mb-4 mx-auto">
+                        <div class="mx-2 card">
+                            <h3 class="mt-3">{{$service->providerName}}</h3>
+                            <p>{{$service->providerPhone}}</p>
+                            <h4 class="mt-4">Avaliações:</h2>
+
+                            @if ($haveRating)
+                                <hr>
+                                <h4>{{$myRating->user->companyName}}</h3>
+                                <h5 class="mb-3">{{$myRating->created_at}}</h3>
+                                <p>{{$myRating->text}}</p>
+                                <hr>
+                            @endif
+
+                            @foreach ($ratings as $rating)
+                                <hr>
+                                <h4>{{$rating->user->companyName}}</h3>
+                                <h5 class="mb-3">{{$rating->created_at}}</h3>
+                                <p>{{$rating->text}}</p>
+                                <hr>
+                            @endforeach
+
+                            @if ($haveRating)
+                                <a href="{{route('g.ratings.edit', [$service->id, $myRating->id])}}" class="btn btn-success mx-auto my-3">Editar avaliação</a>
+                            @else
+                                <a href="{{route('g.ratings.create', $service->id)}}" class="btn btn-success mx-auto my-3">Criar avaliação</a>
+                            @endif
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
