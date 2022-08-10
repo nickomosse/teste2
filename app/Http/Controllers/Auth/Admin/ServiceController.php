@@ -14,7 +14,7 @@ class ServiceController extends Controller
     public function index(){
         $services = Service::all();
 
-        return view('admin.services.index', [
+        return view('Admin.Services.index', [
             'services' => $services,
         ]);
     }
@@ -23,7 +23,7 @@ class ServiceController extends Controller
         $serviceTypes = ServiceType::all();
         $users = User::all();
 
-        return view('admin.services.create', [
+        return view('Admin.Services.create', [
             'serviceTypes' => $serviceTypes,
             'users' => $users,
         ]);
@@ -63,7 +63,7 @@ class ServiceController extends Controller
         $rating = $service->ratings->where('user_id', $service->user->id)->first();
 
 
-        return view('admin.services.edit', [
+        return view('Admin.Services.edit', [
             'service' => $service,
             'serviceTypes' => $serviceTypes,
             'users' => $users,
@@ -103,7 +103,7 @@ class ServiceController extends Controller
         // $serviceType = ServiceType::find($service->serviceType_id);
         // $service->serviceType = $serviceType;
 
-        return view('admin.services.show', [
+        return view('Admin.Services.show', [
             'service' => $service,
             'rating' => $rating,
         ]);

@@ -15,7 +15,7 @@ class RatingController extends Controller
         $ratings = $service->ratings;
         $mainRating = $service->ratings->where('user_id', $service->user->id)->first();
 
-        return view('admin.ratings.index', [
+        return view('Admin.Ratings.index', [
             'ratings' => $ratings,
             'service' => $service,
             'mainRating' => $mainRating,

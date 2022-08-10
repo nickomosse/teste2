@@ -25,7 +25,7 @@ class ServiceTypeController extends Controller
         // $services = Service::where('serviceType_id', $id)->get();
         $services = $serviceType->services;
 
-        return view('servicetypes.show', [
+        return view('ServiceTypes.show', [
             'serviceType' => $serviceType,
             'services' => $services,
         ]);

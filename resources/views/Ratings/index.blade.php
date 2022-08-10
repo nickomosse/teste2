@@ -19,7 +19,6 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
-                text-align: center;
             }
 
             .full-height {
@@ -111,21 +110,13 @@
             }
             .card {
                 background: #F0EDED;
-            }
-            a {
-                color: inherit;
-
-            }
-            a:hover{
-                text-decoration: none;
-                color: inherit;
-            }
-            .card {
-                border-radius: 15px;
-                width: 90%;
-            }
-            .btn {
                 max-width: 50%;
+            }
+            a{
+                width: 400px !important;
+            }
+            .card-h{
+                background-color: inherit;
             }
         </style>
     </head>
@@ -137,28 +128,34 @@
 
         </section>
         <main>
-
-            <p class="h5 py-4 mb-4 principal">Indicações do tipo: <b>{{$serviceType->name}}</b></p>
-
-            <div class="container w-sm-50">
-                <div class="row">
-                    @foreach ($services as $service)
-                        <a href="{{route('g.services.show', $service->id)}}">
-                            <div class="col-sm-6 mb-4">
-                                <div class="mx-2 card">
-                                    <h2 class="mt-3">{{$service->name}}</h2>
-                                    <h3 class="mt-3">{{$service->providerName}}</h3>
-                                    <p>{{$service->providerPhone}}</p>
-                                    <a href="#" class="btn btn-success mx-auto my-3">Ver Avaliações</a>
+            <h1>{{$user->companyName}}</h1>
+            <h2>Minhas avaliações:</h2>
+            <hr>
+        </main>
+        <div class="container">
+            <div class="row">
+                <div class="card col-sm-8 mx-auto">
+                    <div class="card-body">
+                        <div class="mx-auto my-5 scrolltest">
+                            @foreach ($ratings as $rating)
+                                <div>
+                                    <h2 class="h3">{{$rating->service->name}}</h2>
+                                    <h3 class="h4">{{$rating->service->providerName}}</h3>
+                                    <h3 class="h5">{{$rating->service->serviceType->name}}</h3>
+                                    <h3 class="h6">{{$rating->service->providerPhone}}</h3>
+                                    <h4 class="h6">Avaliação:</h4>
+                                    <h5 class="h6">{{$rating->created_at}}</h5>
+                                    <p>{{$rating->text}}</p>
+                                    <a class="btn-info p-1" href="{{route('g.ratings.edit', [$rating->service->id, $rating->id])}}">Editar</a>
+                                    <a class="btn-danger p-1" href="{{route('g.ratings.destroy', [$rating->id])}}">Excluir</a>
+                                    <hr>
                                 </div>
-                            </div>
-                        </a>
-                    @endforeach
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-        </main>
+        </div>
     </body>
 </html>
 

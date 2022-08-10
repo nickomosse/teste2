@@ -6,9 +6,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Service;
 use App\Rating;
+use App\User;
 
 class RatingController extends Controller
 {
+    public function index(){
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        $ratings = Rating::where('user_id', $user_id)->get();
+
+        return view('Ratings.index', [
+            'user' => $user,
+            'ratings' => $ratings
+        ]);
+    }
+
     public function create($id){
         $service = Service::find($id);
 
@@ -26,7 +39,7 @@ class RatingController extends Controller
 
         $rating = new Rating;
         $rating->text = $request->ratingtext;
-        $rating->user = Auth::user();
+        $rating->user_id = Auth::user()->id;
         $rating->service_id = $service->id;
         $rating->direct = true;
         $rating->save();
@@ -53,6 +66,17 @@ class RatingController extends Controller
         $rating->text = $request->ratingtext;
         $rating->save();
 
-        return redirect()->route('g.services.show', $rating->service->id);
+        return redirect()->route('g.myratings.index');
+    }
+
+    public function destroy($id){
+        $rating = Rating::find($id);
+
+        //Delete only if the rating is not the only one for the service.
+        if(count($rating->service->ratings) > 1) {
+            $rating->delete();
+        }
+
+        return redirect()->back();
     }
 }

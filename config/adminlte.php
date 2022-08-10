@@ -243,25 +243,25 @@ return [
         ['header' => 'PÁGINAS PRINCIPAIS'],
         [
             'text' => 'Casas cadastradas',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
             'classes'  => 'tipo tipu',
         ],
         ['header' => 'CASAS DE FESTAS'],
         [
             'text' => 'Casas cadastradas',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
         ],
         ['header' => 'SERVIÇOS'],
         [
             'text' => 'Indicações cadastradas',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/services',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Tipos de Serviços',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/servicetypes',
             'icon' => 'fas fa-fw fa-user',
         ],
         ['header' => 'CONFIGURAÇÕES'],
@@ -272,7 +272,7 @@ return [
         ],
         [
             'text' => 'Registro de acessos',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/logs',
             'icon' => 'fas fa-fw fa-lock',
         ],
 

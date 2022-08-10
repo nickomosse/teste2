@@ -19,6 +19,9 @@
                     <tr>
                         <th>Id</th>
                         <th>Nome da Empresa</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Endereço</th>
                         <th width="270">Ações</th>
                     </tr>
                 </thead>
@@ -30,6 +33,15 @@
                             </td>
                             <td>
                                 {{ $user->companyName }}
+                            </td>
+                            <td>
+                                {{ $user->phone }}
+                            </td>
+                            <td>
+                                {{ $user->email }}
+                            </td>
+                            <td>
+                                {{ $user->adress }}
                             </td>
                             <td style="width=10px;">
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">Editar</a>

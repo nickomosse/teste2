@@ -19,6 +19,8 @@
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Serviço</th>
                         <th width="270">Ações</th>
                     </tr>
                 </thead>
@@ -27,6 +29,12 @@
                         <tr>
                             <td>
                                 {{ $service->id }}
+                            </td>
+                            <td>
+                                {{ $service->providerName }}
+                            </td>
+                            <td>
+                                {{ $service->providerPhone }}
                             </td>
                             <td>
                                 {{ $service->name }}

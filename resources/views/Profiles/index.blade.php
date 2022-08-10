@@ -19,7 +19,6 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
-                text-align: center;
             }
 
             .full-height {
@@ -84,9 +83,8 @@
                 background-color: #2EB8AC;
                 border-radius: 30px;
             }
-
-            ::-webkit-scrollbar{
-                width: 1.5em !important;
+            /* ::-webkit-scrollbar{
+                width: 2em;
             }
             ::-webkit-scrollbar-track{
                 background: #2F2E30;
@@ -98,35 +96,13 @@
             }
             .scrolltest {
                 width: 500px;
-                height: 300px;
+                height: 200px;
                 overflow: hidden;
                 overflow-y: scroll;
             }
             .scrolltest::-webkit-scrollbar{
                 width: 5em;
-            }
-            p {
-                font-weight: bold;
-                font-size: 18px;
-            }
-            .card {
-                background: #F0EDED;
-            }
-            a {
-                color: inherit;
-
-            }
-            a:hover{
-                text-decoration: none;
-                color: inherit;
-            }
-            .card {
-                border-radius: 15px;
-                width: 90%;
-            }
-            .btn {
-                max-width: 50%;
-            }
+            } */
         </style>
     </head>
     <body>
@@ -137,27 +113,28 @@
 
         </section>
         <main>
+            <h2 class="mt-3">Bem-vindo,</h2>
+            <h1>{{$user->companyName}}</h1>
 
-            <p class="h5 py-4 mb-4 principal">Indicações do tipo: <b>{{$serviceType->name}}</b></p>
-
-            <div class="container w-sm-50">
-                <div class="row">
-                    @foreach ($services as $service)
-                        <a href="{{route('g.services.show', $service->id)}}">
-                            <div class="col-sm-6 mb-4">
-                                <div class="mx-2 card">
-                                    <h2 class="mt-3">{{$service->name}}</h2>
-                                    <h3 class="mt-3">{{$service->providerName}}</h3>
-                                    <p>{{$service->providerPhone}}</p>
-                                    <a href="#" class="btn btn-success mx-auto my-3">Ver Avaliações</a>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+            <div class="my-4">
+                <h3>Editar perfil:</h3>
+                <a href="#" class="btn btn-info">Editar perfil</a>
+            </div>
+            <div class="mb-4">
+                <h3>Veja abaixo as avaliações que você realizou</h3>
+                <a href="#" class="btn btn-info">Minhas avaliações</a>
+            </div>
+            <div class="mb-4">
+                <h3>Veja abaixo as indicações que você realizou</h3>
+                <a href="#" class="btn btn-info">Minhas indicações</a>
+            </div>
+            <div class="mb-2">
+                <h3>Fazer uma indicação?</h3>
+                <p>Clique no botão abaixo para fazer uma indicação <br>
+                de serviços para as outras casas de festas:</p>
             </div>
 
-
+            <a href="#" class="btn btn-info">Indicar!</a>
         </main>
     </body>
 </html>

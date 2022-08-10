@@ -98,43 +98,38 @@
 </section>
 
 <section>
-    <h1 class="h2 my-4">Realizar indicação</h1>
+    <h1 class="h2 my-4">Editar serviço indicado</h1>
 
     <div class="row">
         <div class="col-sm-4 mx-auto">
             <div class="card mb-4">
                 <h2 class="h6 mt-3 mx-auto">Preencha os campos abaixo:</h2>
                 <div class="card-body">
-                    <form action="{{ route('g.services.store') }}" class="form" method="POST">
+                    <form action="{{ route('g.services.update', $service->id) }}" class="form" method="POST">
                         @csrf
 
                         <div class="form-group">
                             <label>Nome do serviço:</label>
-                            <input required type="text" name="name" class="form-control" placeholder="Marcos refrigeração">
+                            <input required type="text" value="{{$service->name}}" name="name" class="form-control" placeholder="Marcos refrigeração">
                         </div>
 
                         <div class="form-group">
                             <label>Nome do prestador do serviço:</label>
-                            <input required type="text" name="providerName" class="form-control" placeholder="Marcos Cruz">
+                            <input required type="text" value="{{$service->providerName}}" name="providerName" class="form-control" placeholder="Marcos Cruz">
                         </div>
 
                         <div class="form-group">
                             <label>Telefone do prestador do serviço:</label>
-                            <input required type="text" name="providerPhone" class="form-control" placeholder="21999999999">
+                            <input required type="text" value="{{$service->providerPhone}}" name="providerPhone" class="form-control" placeholder="21999999999">
                         </div>
 
                         <div class="form-group">
                             <label for="serviceType_id">Tipo de serviço:</label>
                             <select class="custom-select rounded-0" id="serviceType_id" required name="serviceType_id">
                                 @foreach ($serviceTypes as $serviceType)
-                                    <option value="{{$serviceType->id}}">{{$serviceType->name}}</option>
+                                    <option @if ($serviceType == $service->serviceType) selected @endif value="{{$serviceType->id}}">{{$serviceType->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="rating">Avaliação:</label>
-                            <textarea required name="rating" class="form-control" id="rating" rows="6"></textarea>
                         </div>
 
                         <div class="form-group">

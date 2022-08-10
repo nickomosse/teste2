@@ -19,7 +19,6 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
-                text-align: center;
             }
 
             .full-height {
@@ -98,7 +97,7 @@
             }
             .scrolltest {
                 width: 500px;
-                height: 300px;
+                height: 320px;
                 overflow: hidden;
                 overflow-y: scroll;
             }
@@ -111,21 +110,13 @@
             }
             .card {
                 background: #F0EDED;
-            }
-            a {
-                color: inherit;
-
-            }
-            a:hover{
-                text-decoration: none;
-                color: inherit;
-            }
-            .card {
-                border-radius: 15px;
-                width: 90%;
-            }
-            .btn {
                 max-width: 50%;
+            }
+            a{
+                width: 400px !important;
+            }
+            .card-h{
+                background-color: inherit;
             }
         </style>
     </head>
@@ -137,28 +128,42 @@
 
         </section>
         <main>
-
-            <p class="h5 py-4 mb-4 principal">Indicações do tipo: <b>{{$serviceType->name}}</b></p>
-
-            <div class="container w-sm-50">
-                <div class="row">
-                    @foreach ($services as $service)
-                        <a href="{{route('g.services.show', $service->id)}}">
-                            <div class="col-sm-6 mb-4">
-                                <div class="mx-2 card">
-                                    <h2 class="mt-3">{{$service->name}}</h2>
-                                    <h3 class="mt-3">{{$service->providerName}}</h3>
-                                    <p>{{$service->providerPhone}}</p>
-                                    <a href="#" class="btn btn-success mx-auto my-3">Ver Avaliações</a>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-
+            <h1>{{$user->companyName}}</h1>
+            <h2>Minhas recomendações:</h2>
+            <hr>
 
         </main>
+        <div class="container">
+            <div class="row">
+                <div class="card col-sm-8 mx-auto">
+                    <div class="card-body">
+                        <div class="mx-auto my-5 scrolltest">
+                            @foreach ($services as $service)
+                                <div>
+                                    <h2 class="h3">{{$service->name}}</h2>
+                                    <h3 class="h4">{{$service->providerName}}</h3>
+                                    <h3 class="h5">{{$service->serviceType->name}}</h3>
+                                    <h3 class="h6">{{$service->providerPhone}}</h3>
+
+                                    @if ($service->myrating)
+                                        <h4 class="h6">Avaliação:</h4>
+                                        <h5 class="h6">{{$service->myrating->created_at}}</h5>
+                                        <p>{{$service->myrating->text}}</p>
+                                        <a class="btn-info p-2" href="{{route('g.ratings.edit', [$service->myrating->service->id, $service->myrating->id])}}">Editar avaliação</a>
+                                        <a class="btn-danger p-2" href="{{route('g.ratings.destroy', [$service->myrating->id])}}">Excluir avaliação</a>
+                                        <hr>
+                                    @endif
+                                    <a class="btn-info p-2" href="{{route('g.services.edit', [$service->id])}}">Editar serviço</a>
+                                    <a class="btn-danger p-2" href="{{route('g.services.destroy', [$service->id])}}">Excluir serviço</a>
+
+                                    <hr>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
 

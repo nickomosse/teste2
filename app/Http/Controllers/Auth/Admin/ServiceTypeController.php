@@ -11,13 +11,13 @@ class ServiceTypeController extends Controller
     public function index(){
         $serviceTypes = ServiceType::all();
 
-        return view('admin.servicetypes.index', [
+        return view('Admin.ServiceTypes.index', [
             'serviceTypes' => $serviceTypes,
         ]);
     }
 
     public function create(){
-        return view('admin.servicetypes.create');
+        return view('Admin.ServiceTypes.create');
     }
 
     public function store(Request $request){
@@ -36,7 +36,7 @@ class ServiceTypeController extends Controller
             return back();
         }
 
-        return view('admin.servicetypes.edit', [
+        return view('Admin.ServiceTypes.edit', [
             'serviceType' => $serviceType,
         ]);
     }
@@ -61,7 +61,7 @@ class ServiceTypeController extends Controller
             return back();
         }
 
-        return view('admin.servicetypes.show', [
+        return view('Admin.ServiceTypes.show', [
             'serviceType' => $serviceType,
         ]);
     }

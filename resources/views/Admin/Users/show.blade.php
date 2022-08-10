@@ -3,7 +3,7 @@
 @section('title', "Serviço")
 
 @section('content_header')
-    <h1>Serviço</h1>
+    <h1>Casa de festa</h1>
 @stop
 
 @section('content')
@@ -11,30 +11,27 @@
         <div class="card-body">
             <ul>
                 <li>
-                    <strong>Id: </strong> {{ $service->id }}
+                    <strong>Id: </strong> {{ $user->id }}
                 </li>
                 <li>
-                    <strong>Nome do Serviço: </strong> {{ $service->name }}
+                    <strong>Nome da casa de festa </strong> {{ $user->name }}
                 </li>
                 <li>
-                    <strong>Nome do dono do Serviço: </strong> {{ $service->providerName }}
+                    <strong>Nome do representante: </strong> {{ $user->phone }}
                 </li>
                 <li>
-                    <strong>Telefone do dono do Serviço: </strong> {{ $service->providerPhone }}
+                    <strong>Email: </strong> {{ $user->email }}
                 </li>
                 <li>
-                    <strong>Nome da casa indicadora: </strong> {{ $service->user->companyName }}
+                    <strong>Endereço: </strong> {{ $user->adress }}
                 </li>
                 <li>
-                    <strong>Nome do Representante: </strong> {{ $service->user->name }}
-                </li>
-                <li>
-                    <strong>Tipo do serviço: </strong> {{ $service->serviceType->name }}
+                    <strong>Telefone: </strong> {{ $user->phone }}
                 </li>
 
             </ul>
 
-            <form action="{{ route('services.destroy', $service->id) }}" method="POST">
+            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>DELETAR</button>

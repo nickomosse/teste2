@@ -16,7 +16,7 @@
                     {{dd($errors)}}
                 @endif
                 <div class="form-group">
-                    <label for="companyName">Nome do empresa</label>
+                    <label for="companyName">Nome da empresa</label>
                     <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Empresa do Tutú" value="{{old('companyName')}}">
                 </div>
                 <div class="form-group">

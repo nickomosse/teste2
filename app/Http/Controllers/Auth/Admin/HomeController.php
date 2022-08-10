@@ -19,7 +19,7 @@ class HomeController extends Controller
         $qtdAccessLogs = count($accessLogs);
 
 
-        return view('admin.index', [
+        return view('Admin.index', [
             "qtdUsers" => $qtdUsers,
             "qtdServices" => $qtdServices,
             "qtdServiceTypes" => $qtdServiceTypes,
